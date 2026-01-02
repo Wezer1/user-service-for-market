@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-create-user-roles
+      author: user-service
+      changes:
+        - createTable:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: assigned_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            columnNames: user_id, role_id
+            constraintName: pk_user_roles
+            tableName: user_roles

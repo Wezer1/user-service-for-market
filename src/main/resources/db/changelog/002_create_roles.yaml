@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-create-roles
+      author: user-service
+      changes:
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
