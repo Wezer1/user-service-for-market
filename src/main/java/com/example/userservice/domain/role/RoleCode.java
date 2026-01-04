@@ -1,4 +1,6 @@
 package com.example.userservice.domain.role;
 
-public class RoleCode {
+public enum RoleCode {
+    ADMIN,
+    CLIENT
 }
