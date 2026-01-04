@@ -2,7 +2,7 @@ package com.example.userservice.application.port;
 
 import com.example.userservice.domain.role.RoleCode;
 
-import javax.management.relation.Role;
+import com.example.userservice.domain.role.Role;
 
 public interface RoleRepository {
 

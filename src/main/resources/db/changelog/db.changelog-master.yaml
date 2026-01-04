@@ -5,4 +5,6 @@ databaseChangeLog:
       file: db/changelog/002_create_roles.yaml
   - include:
       file: db/changelog/003_create_user_roles.yaml
+  - include:
+      file: db/changelog/003_insert_roles.yaml
 

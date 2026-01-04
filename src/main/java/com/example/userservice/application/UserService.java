@@ -8,8 +8,8 @@ import com.example.userservice.domain.role.RoleCode;
 import com.example.userservice.domain.user.User;
 import com.example.userservice.domain.user.UserStatus;
 import com.example.userservice.domain.user.UserValidator;
+import com.example.userservice.domain.role.Role;
 
-import javax.management.relation.Role;
 import java.time.Instant;
 import java.util.UUID;
 

@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: dev
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "gen_random_uuid()"
+              - column:
+                  name: code
+                  value: CLIENT
+              - column:
+                  name: description
+                  value: "Default client role"
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "gen_random_uuid()"
+              - column:
+                  name: code
+                  value: ADMIN
+              - column:
+                  name: description
+                  value: "Administrator role"

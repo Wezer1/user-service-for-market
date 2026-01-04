@@ -1,6 +1,7 @@
 package com.example.userservice.domain.user;
 
-import javax.management.relation.Role;
+import com.example.userservice.domain.role.Role;
+
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
