@@ -1,4 +1,10 @@
 package com.example.userservice.application.port;
 
-public class RoleRepository {
+import com.example.userservice.domain.role.RoleCode;
+
+import javax.management.relation.Role;
+
+public interface RoleRepository {
+
+    Role findByCode(RoleCode code);
 }

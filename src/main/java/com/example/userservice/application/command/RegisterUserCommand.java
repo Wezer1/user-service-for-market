@@ -1,4 +1,6 @@
 package com.example.userservice.application.command;
 
-public class RegisterUserCommand {
-}
+public record RegisterUserCommand(
+        String email,
+        String rawPassword
+) {}
