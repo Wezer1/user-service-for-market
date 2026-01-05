@@ -16,7 +16,7 @@ public class UserMapper {
                 entity.getId(),
                 entity.getEmail(),
                 entity.getPasswordHash(),
-                UserStatus.valueOf(entity.getStatus()),
+                entity.getStatus(),
                 entity.getCreatedAt()
         );
 

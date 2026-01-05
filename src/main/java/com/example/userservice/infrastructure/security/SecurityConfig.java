@@ -2,6 +2,7 @@ package com.example.userservice.infrastructure.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,13 +15,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                .csrf(csrf -> csrf.disable()) // отключаем CSRF для API
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/register").permitAll() // разрешаем регистрацию
-                        .anyRequest().authenticated() // остальные эндпоинты требуют аутентификации
-                )
-                .httpBasic(); // можно оставить Basic для теста
-
+                        .anyRequest().permitAll()
+                );
         return http.build();
     }
 

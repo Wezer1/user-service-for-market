@@ -1,6 +1,7 @@
 package com.example.userservice.application;
 
 import com.example.userservice.application.command.RegisterUserCommand;
+import com.example.userservice.application.filter.UserFilter;
 import com.example.userservice.application.port.PasswordHasher;
 import com.example.userservice.application.port.RoleRepository;
 import com.example.userservice.application.port.UserRepository;
@@ -11,6 +12,7 @@ import com.example.userservice.domain.user.UserValidator;
 import com.example.userservice.domain.role.Role;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 public class UserService {
@@ -50,4 +52,14 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
+    public User findById(UUID id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("User not found: " + id));
+    }
+
+    public List<User> search(UserFilter filter) {
+        return userRepository.findByFilter(filter);
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.userservice.infrastructure.persistence.entity;
 
+import com.example.userservice.domain.user.UserStatus;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -21,7 +22,8 @@ public class UserEntity {
     private String passwordHash;
 
     @Column(nullable = false)
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
@@ -36,12 +38,7 @@ public class UserEntity {
     protected UserEntity() {
     }
 
-    public UserEntity(UUID id,
-                      String email,
-                      String passwordHash,
-                      String status,
-                      Instant createdAt) {
-
+    public UserEntity(UUID id, String email, String passwordHash, UserStatus status, Instant createdAt) {
         this.id = id;
         this.email = email;
         this.passwordHash = passwordHash;
@@ -65,7 +62,7 @@ public class UserEntity {
         return passwordHash;
     }
 
-    public String getStatus() {
+    public UserStatus getStatus() {
         return status;
     }
 
