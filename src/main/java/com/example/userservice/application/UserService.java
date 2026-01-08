@@ -61,5 +61,62 @@ public class UserService {
     public List<User> search(UserFilter filter) {
         return userRepository.findByFilter(filter);
     }
+    public User updateUser(UUID userId, String newEmail, String newRawPassword) {
+
+        if (newEmail == null && newRawPassword == null) {
+            throw new IllegalArgumentException("Nothing to update");
+        }
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalStateException("User not found: " + userId));
+
+        if (newEmail != null) {
+            validator.validateEmail(newEmail);
+
+            if (!newEmail.equals(user.getEmail())
+                    && userRepository.existsByEmail(newEmail)) {
+                throw new IllegalStateException("User with this email already exists");
+            }
+
+            user.changeEmail(newEmail);
+        }
+
+        if (newRawPassword != null) {
+            validator.validatePassword(newRawPassword);
+
+            String hashedPassword = passwordHasher.hash(newRawPassword);
+            user.changePassword(hashedPassword);
+        }
+
+        return userRepository.save(user);
+    }
+
+    public User blockUser(UUID userId) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalStateException("User not found: " + userId));
+
+        if (user.getStatus() == UserStatus.BLOCKED) {
+            throw new IllegalStateException("User is already blocked");
+        }
+
+        user.block();
+
+        return userRepository.save(user);
+    }
+
+    public User unblockUser(UUID userId) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalStateException("User not found: " + userId));
+
+        if (user.getStatus() == UserStatus.ACTIVE) {
+            throw new IllegalStateException("User is not blocked");
+        }
+
+        user.unblock();
+
+        return userRepository.save(user);
+    }
 
 }

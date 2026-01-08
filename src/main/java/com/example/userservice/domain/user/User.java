@@ -9,9 +9,9 @@ import java.util.UUID;
 
 public class User {
     private final UUID id;
-    private final String email;
-    private final String passwordHash;
-    private final UserStatus status;
+    private String email;
+    private String passwordHash;
+    private UserStatus status;
     private final Instant createdAt;
 
     private final Set<Role> roles = new HashSet<>();
@@ -24,8 +24,31 @@ public class User {
         this.createdAt = createdAt;
     }
 
+    public void block() {
+        if (this.status == UserStatus.BLOCKED) {
+            throw new IllegalStateException("User already blocked");
+        }
+        this.status = UserStatus.BLOCKED;
+    }
+
+    public void unblock() {
+        if (this.status == UserStatus.ACTIVE) {
+            throw new IllegalStateException("User is not blocked");
+        }
+        this.status = UserStatus.ACTIVE;
+    }
+
+
     public void assignRole(Role role) {
         roles.add(role);
+    }
+
+    public void changeEmail(String newEmail) {
+        this.email = newEmail;
+    }
+
+    public void changePassword(String newPasswordHash) {
+        this.passwordHash = newPasswordHash;
     }
 
     public UUID getId() {
